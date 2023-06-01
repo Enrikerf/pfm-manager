@@ -30,7 +30,7 @@ debug: ## run on debug mode, remember to listen on the IDE
 	docker exec -ti go-manager dlv --headless --listen=:40000 --api-version=2 debug
 debug-test: ## run on debug mode, remember to listen on the IDE
 	docker exec -ti go-manager dlv --headless --listen=:40000 --api-version=2 test
-runTests: ##@tests Start all or <container_name> containers in foreground
+test: ##@tests Start all or <container_name> containers in foreground
 	cd tests; go test ./... -v; cd -
 
 ## —— Proto —————————————————————————————————————————
