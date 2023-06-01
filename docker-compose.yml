@@ -18,6 +18,7 @@ services:
       - SYS_PTRACE
     volumes:
       - .:/app
+      - ~/.ssh:/home/docker-user/.ssh
     tty: true
   envoy:
     build:
