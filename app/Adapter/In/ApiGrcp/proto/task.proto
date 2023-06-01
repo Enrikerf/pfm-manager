@@ -1,0 +1,85 @@
+syntax = "proto3";
+package task;
+option go_package = "./task";
+import "google/protobuf/wrappers.proto";
+
+service TaskService{
+  rpc CreateTask (CreateTaskRequest) returns (CreateTaskResponse);
+  rpc ReadTask(ReadTaskRequest) returns (ReadTaskResponse);
+  rpc UpdateTask(UpdateTaskRequest) returns (UpdateTaskResponse);
+  rpc DeleteTask(DeleteTaskRequest) returns (DeleteTaskResponse);
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse);
+}
+message Task{
+  string uuid = 1;
+  string host = 2;
+  string port = 3;
+  repeated string commands = 4;
+  string mode = 5;
+  string status = 6;
+  string executionMode = 7;
+}
+message CreateTaskParams{
+  string host = 1;
+  string port = 2;
+  repeated string commands = 3;
+  Mode mode = 4;
+  ExecutionMode executionMode = 5;
+}
+message EditableTaskParams{
+  google.protobuf.StringValue host = 1;
+  google.protobuf.StringValue port = 2;
+  Mode mode = 4;
+  Status status = 5;
+  ExecutionMode executionMode = 6;
+}
+enum Status {
+  StatusNotChange = 0;
+  PENDING = 1;
+  RUNNING = 2;
+  DONE = 3;
+}
+enum Mode {
+  ModeNotChange = 0;
+  UNARY = 1;
+  CLIENT_STREAM = 2;
+  SERVER_STREAM = 3;
+  BIDIRECTIONAL = 4;
+}
+enum ExecutionMode {
+  ExecutionModeMotChange = 0;
+  AUTOMATIC = 1;
+  MANUAL = 2;
+}
+
+message CreateTaskRequest{
+  CreateTaskParams taskParams = 1;
+}
+message CreateTaskResponse{
+  Task task = 1;
+}
+
+message ReadTaskRequest{
+  string task_uuid = 1;
+}
+message ReadTaskResponse{
+  Task task = 1;
+}
+
+message UpdateTaskRequest{
+  string task_uuid = 1;
+  EditableTaskParams params = 2;
+}
+message UpdateTaskResponse{}
+
+message DeleteTaskRequest{
+  string task_uuid = 1;
+}
+message DeleteTaskResponse{}
+
+message ListTasksRequest{}
+message ListTasksResponse{
+  repeated Task tasks = 1;
+}
+
+

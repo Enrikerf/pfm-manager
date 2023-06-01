@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package call;
+option go_package = "./call";
+
+
+message CallRequest{
+  string step = 2;
+}
+
+message CallResponse{
+  string result = 1;
+}
+
+service CallService{
+  rpc CallUnary(CallRequest) returns (CallResponse) {};
+  rpc CallServerStream(CallRequest) returns (stream CallResponse) {};
+  rpc CallClientStream(stream CallRequest) returns (CallResponse) {};
+  rpc CallBidirectional(stream CallRequest) returns (stream CallResponse){};
+}
+

@@ -1,0 +1,52 @@
+syntax = "proto3";
+package result;
+option go_package = "./result";
+import "google/protobuf/wrappers.proto";
+
+service ResultService{
+  rpc CommunicateTaskManually (CommunicateTaskManuallyRequest) returns (CommunicateTaskManuallyResponse);
+  rpc GetBatchResults(GetBatchResultsRequest) returns (ListResultsResponse);
+  rpc GetTaskBatches(GetTaskBatchesRequest) returns (ListBatchesResponse);
+  rpc StreamResults(StreamResultsRequest) returns (stream StreamResultsResponse);
+}
+
+message Batch{
+  string uuid = 1;
+  string task_uuid = 2;
+  string created_at = 3;
+}
+message CommunicateTaskManuallyRequest{
+  string task_uuid = 1;
+}
+message CommunicateTaskManuallyResponse{
+  string batch_uuid = 1;
+}
+message GetTaskBatchesRequest{
+  string task_uuid = 1;
+}
+message ListBatchesResponse{
+  repeated Batch batches = 1;
+}
+message Result{
+  string uuid = 1;
+  string batch_uuid = 2;
+  string content = 3;
+  string created_at = 5;
+}
+message Filters{
+  google.protobuf.StringValue batch_uuid = 1;
+}
+message GetBatchResultsRequest{
+  string batch_uuid = 1;
+}
+message ListResultsResponse{
+  repeated Result results = 1;
+}
+message StreamResultsRequest{
+  string batch_uuid = 1;
+}
+message StreamResultsResponse{
+  repeated Result results = 1;
+}
+
+
