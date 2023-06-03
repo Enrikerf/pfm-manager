@@ -1,18 +1,34 @@
 package ExecutionMode
 
-type Mode string
+type Mode interface {
+	Value() Enum
+}
 
-const (
-	Manual    Mode = "MANUAL"
-	Automatic Mode = "AUTOMATIC"
-)
+func New(enum Enum) Mode {
+	return &mode{enum}
+}
 
 func FromString(mode string) (Mode, error) {
 	switch mode {
 	case "MANUAL":
-		return Manual, nil
+		return New(Manual), nil
 	case "AUTOMATIC":
-		return Automatic, nil
+		return New(Automatic), nil
 	}
-	return "", NewUnknownError()
+	return nil, NewUnknownError()
 }
+
+type mode struct {
+	enum Enum
+}
+
+func (s *mode) Value() Enum {
+	return s.enum
+}
+
+type Enum string
+
+const (
+	Manual    Enum = "MANUAL"
+	Automatic Enum = "AUTOMATIC"
+)

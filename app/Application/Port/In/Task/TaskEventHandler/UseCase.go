@@ -38,7 +38,7 @@ func (useCase *taskEventHandler) Handle(taskChanged Event.TaskCreated) {
 		return
 	}
 
-	if task.GetExecutionMode() != ExecutionMode.Automatic || task.GetStatus().Value() != Status.Pending {
+	if task.GetExecutionMode().Value() != ExecutionMode.Automatic || task.GetStatus().Value() != Status.Pending {
 		return
 	}
 	if !useCase.looper.IsEnabled() {

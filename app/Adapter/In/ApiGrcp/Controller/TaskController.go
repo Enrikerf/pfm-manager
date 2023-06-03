@@ -54,7 +54,7 @@ func (controller TaskController) CreateTask(
 		Commands:      commandNames,
 		Mode:          string(task.GetCommunicationMode().Value()),
 		Status:        string(task.GetStatus().Value()),
-		ExecutionMode: string(task.GetExecutionMode()),
+		ExecutionMode: string(task.GetExecutionMode().Value()),
 	}
 	return &taskProto.CreateTaskResponse{Task: &newTask}, nil
 }
@@ -79,7 +79,7 @@ func (controller TaskController) ReadTask(
 		Commands:      nil,
 		Mode:          string(task.GetCommunicationMode().Value()),
 		Status:        string(task.GetStatus().Value()),
-		ExecutionMode: string(task.GetExecutionMode()),
+		ExecutionMode: string(task.GetExecutionMode().Value()),
 	}}, nil
 }
 
@@ -147,7 +147,7 @@ func (controller TaskController) ListTasks(ctx context.Context, in *taskProto.Li
 			Commands:      commands,
 			Mode:          string(task.GetCommunicationMode().Value()),
 			Status:        string(task.GetStatus().Value()),
-			ExecutionMode: string(task.GetExecutionMode()),
+			ExecutionMode: string(task.GetExecutionMode().Value()),
 		}
 		tasksProtoArray = append(tasksProtoArray, &t)
 	}

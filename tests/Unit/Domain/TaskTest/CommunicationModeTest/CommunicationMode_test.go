@@ -78,19 +78,19 @@ func TestNew(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want CommunicationMode.Mode
+		want CommunicationMode.Enum
 	}{
 		{
 			name: "Test New",
 			args: args{
 				enum: CommunicationMode.Unary,
 			},
-			want: CommunicationMode.New(CommunicationMode.Unary),
+			want: CommunicationMode.Unary,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := CommunicationMode.New(tt.args.enum); !reflect.DeepEqual(got, tt.want) {
+			if got := CommunicationMode.New(tt.args.enum); !reflect.DeepEqual(got.Value(), tt.want) {
 				t.Errorf("New() = %v, want %v", got, tt.want)
 			}
 		})

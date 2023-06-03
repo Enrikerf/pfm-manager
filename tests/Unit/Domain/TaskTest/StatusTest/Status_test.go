@@ -70,19 +70,19 @@ func TestNew(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want Status.Status
+		want Status.Enum
 	}{
 		{
 			name: "Test New",
 			args: args{
 				enum: Status.Pending,
 			},
-			want: Status.New(Status.Pending),
+			want: Status.Pending,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Status.New(tt.args.enum); !reflect.DeepEqual(got, tt.want) {
+			if got := Status.New(tt.args.enum); !reflect.DeepEqual(got.Value(), tt.want) {
 				t.Errorf("New() = %v, want %v", got, tt.want)
 			}
 		})

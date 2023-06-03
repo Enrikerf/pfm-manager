@@ -55,7 +55,7 @@ func (e *executor) Execute(taskId Task.Id) (Result.Batch, error) {
 	if err != nil {
 		return nil, err
 	}
-	if task.GetExecutionMode() != ExecutionMode.Manual {
+	if task.GetExecutionMode().Value() != ExecutionMode.Manual {
 		return nil, Error.NewTaskNotManualCanNotBeExecutedManuallyError()
 	}
 	if task.GetStatus().Value() == Status.Running {
