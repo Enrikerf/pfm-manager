@@ -25,6 +25,10 @@ jobs:
       run: go test -covermode=atomic -coverprofile=coverage.out ./... > cover.out
     - name: Results
       run: go test -json -coverprofile=cover.out ./... > result.json
+    - name: cat
+      run: cat cover.out
+    - name: cat2
+      run: cat cover.json
 
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
