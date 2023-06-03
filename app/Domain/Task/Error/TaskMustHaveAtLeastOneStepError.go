@@ -7,5 +7,5 @@ type TaskMustHaveAtLeastOneStepError interface {
 }
 
 func NewTaskMustHaveAtLeastOneStepError() TaskMustHaveAtLeastOneStepError {
-	return errors.New("TaskMustHaveAtLeastOneStepError")
+	return errors.New("NewTaskMustHaveAtLeastOneStepError")
 }
