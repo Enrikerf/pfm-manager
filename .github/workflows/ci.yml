@@ -26,9 +26,9 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/download-artifact@v3
         with:
-          fetch-depth: 0
+          name: test-reports
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
