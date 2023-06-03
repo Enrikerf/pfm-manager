@@ -1,3 +1,7 @@
+## [1.0.5](https://github.com/Enrikerf/pfm-manager/compare/v1.0.4...v1.0.5) (2023-06-03)
+
+
+
 ## [1.0.4](https://github.com/Enrikerf/pfm-manager/compare/v1.0.3...v1.0.4) (2023-06-03)
 
 
