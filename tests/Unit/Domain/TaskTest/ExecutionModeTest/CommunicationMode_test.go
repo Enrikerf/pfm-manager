@@ -55,28 +55,28 @@ func TestFromString(t *testing.T) {
 	}
 }
 
-//func TestNew(t *testing.T) {
-//	type args struct {
-//		enum ExecutionMode.Enum
-//	}
-//	tests := []struct {
-//		name string
-//		args args
-//		want ExecutionMode.Enum
-//	}{
-//		{
-//			name: "Test New",
-//			args: args{
-//				enum: ExecutionMode.Automatic,
-//			},
-//			want: ExecutionMode.Automatic,
-//		},
-//	}
-//	for _, tt := range tests {
-//		t.Run(tt.name, func(t *testing.T) {
-//			if got := ExecutionMode.New(tt.args.enum); !reflect.DeepEqual(got.Value(), tt.want) {
-//				t.Errorf("New() = %v, want %v", got, tt.want)
-//			}
-//		})
-//	}
-//}
+func TestNew(t *testing.T) {
+	type args struct {
+		enum ExecutionMode.Enum
+	}
+	tests := []struct {
+		name string
+		args args
+		want ExecutionMode.Enum
+	}{
+		{
+			name: "Test New",
+			args: args{
+				enum: ExecutionMode.Automatic,
+			},
+			want: ExecutionMode.Automatic,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ExecutionMode.New(tt.args.enum); !reflect.DeepEqual(got.Value(), tt.want) {
+				t.Errorf("New() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
