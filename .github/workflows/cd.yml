@@ -10,14 +10,14 @@ jobs:
       - uses: actions/checkout@master
         with:
           fetch-depth: 0
-      - name: Create Release c
+      - name: Create Release
         id: create_release
         uses: actions/create-release@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.run_number }}
-          release_name: ${{ github.run_number }}
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
   deploy:
     needs: release
     runs-on: ubuntu-latest
