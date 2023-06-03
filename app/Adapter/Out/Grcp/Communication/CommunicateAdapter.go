@@ -30,7 +30,7 @@ func (adapter CommunicateAdapter) Communicate(task Task.Task) Result.Batch {
 			}
 		}(connection)
 		client := call.NewCallServiceClient(connection)
-		switch task.GetCommunicationMode() {
+		switch task.GetCommunicationMode().Value() {
 		case CommunicationMode.Unary:
 			results = adapter.doUnaryCall(task, client)
 		case CommunicationMode.ServerStream:

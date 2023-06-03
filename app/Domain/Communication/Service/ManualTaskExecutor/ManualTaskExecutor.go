@@ -65,7 +65,7 @@ func (e *executor) Execute(taskId Task.Id) (Result.Batch, error) {
 	e.saveBatchRepository.Persist(batch)
 	task.SetStatus(Status.New(Status.Running))
 	e.saveTaskRepository.Persist(task)
-	switch task.GetCommunicationMode() {
+	switch task.GetCommunicationMode().Value() {
 	case CommunicationMode.Unary:
 		go e.unaryCommunicator.Communicate(task, batch)
 	case CommunicationMode.Bidirectional:

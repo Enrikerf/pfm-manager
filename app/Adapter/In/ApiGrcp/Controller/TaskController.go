@@ -52,7 +52,7 @@ func (controller TaskController) CreateTask(
 		Host:          task.GetHost().GetValue(),
 		Port:          task.GetPort().GetValue(),
 		Commands:      commandNames,
-		Mode:          string(task.GetCommunicationMode()),
+		Mode:          string(task.GetCommunicationMode().Value()),
 		Status:        string(task.GetStatus().Value()),
 		ExecutionMode: string(task.GetExecutionMode()),
 	}
@@ -77,7 +77,7 @@ func (controller TaskController) ReadTask(
 		Host:          task.GetHost().GetValue(),
 		Port:          task.GetPort().GetValue(),
 		Commands:      nil,
-		Mode:          string(task.GetCommunicationMode()),
+		Mode:          string(task.GetCommunicationMode().Value()),
 		Status:        string(task.GetStatus().Value()),
 		ExecutionMode: string(task.GetExecutionMode()),
 	}}, nil
@@ -145,7 +145,7 @@ func (controller TaskController) ListTasks(ctx context.Context, in *taskProto.Li
 			Host:          task.GetHost().GetValue(),
 			Port:          task.GetPort().GetValue(),
 			Commands:      commands,
-			Mode:          string(task.GetCommunicationMode()),
+			Mode:          string(task.GetCommunicationMode().Value()),
 			Status:        string(task.GetStatus().Value()),
 			ExecutionMode: string(task.GetExecutionMode()),
 		}

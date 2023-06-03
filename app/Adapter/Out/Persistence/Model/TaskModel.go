@@ -38,7 +38,7 @@ func (taskDb *TaskDb) FromDomainV2(selfEntity TaskDomain.Task) {
 		step.FromDomainV2(taskDb.Uuid, stepDomain)
 		taskDb.Steps = append(taskDb.Steps, step)
 	}
-	taskDb.Mode = string(selfEntity.GetCommunicationMode())
+	taskDb.Mode = string(selfEntity.GetCommunicationMode().Value())
 	taskDb.Status = string(selfEntity.GetStatus().Value())
 	taskDb.ExecutionMode = string(selfEntity.GetExecutionMode())
 }

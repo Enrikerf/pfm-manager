@@ -16,10 +16,6 @@ func FromString(mode string) (Status, error) {
 		return New(Running), nil
 	case "DONE":
 		return New(Done), nil
-	case "SUCCESSFUL":
-		return New(Successful), nil
-	case "FAILED":
-		return New(Failed), nil
 	}
 	return nil, NewUnknownError()
 }
@@ -35,9 +31,7 @@ func (s *status) Value() Enum {
 type Enum string
 
 const (
-	Pending    Enum = "PENDING"
-	Running    Enum = "RUNNING"
-	Done       Enum = "DONE"
-	Successful Enum = "SUCCESSFUL"
-	Failed     Enum = "FAILED"
+	Pending Enum = "PENDING"
+	Running Enum = "RUNNING"
+	Done    Enum = "DONE"
 )

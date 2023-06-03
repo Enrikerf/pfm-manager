@@ -32,6 +32,22 @@ func TestFromString(t *testing.T) {
 			want:    Status.New(Status.Pending),
 			wantErr: false,
 		},
+		{
+			name: "Valid Running string",
+			args: args{
+				mode: "RUNNING",
+			},
+			want:    Status.New(Status.Running),
+			wantErr: false,
+		},
+		{
+			name: "Valid Done string",
+			args: args{
+				mode: "DONE",
+			},
+			want:    Status.New(Status.Done),
+			wantErr: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
