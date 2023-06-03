@@ -19,9 +19,9 @@ jobs:
       - name: Build
         run: go build -v ./...
       - name: Test
-        run: go test -covermode=atomic -coverprofile=coverage.out ./... > cover.out && echo $(cat cover.out)
+        run: go test -covermode=atomic -coverprofile=cover.out ./... > cover.out && echo $(cat cover.out)
       - name: Results
-        run: go test -json -coverprofile=cover.out ./... > result.json
+        run: go test -json -coverprofile=result.json ./... > result.json && echo $(cat result.json)
       - name: cat
         run: echo $(cat cover.out)
       - name: cat2
