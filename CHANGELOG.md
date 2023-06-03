@@ -1,3 +1,12 @@
+## [1.0.4](https://github.com/Enrikerf/pfm-manager/compare/v1.0.3...v1.0.4) (2023-06-03)
+
+
+### Bug Fixes
+
+* cicd ([e8548d1](https://github.com/Enrikerf/pfm-manager/commit/e8548d1738c1226f61830550cfbb0dc2b263d61f))
+
+
+
 ## [1.0.3](https://github.com/Enrikerf/pfm-manager/compare/v1.0.2...v1.0.3) (2023-06-03)
 
 
