@@ -1,0 +1,28 @@
+name: Go Manager CD
+
+on:
+  push:
+    branches: [ master ]
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+  deploy:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build on production Mode and deploy to a server
+        run: echo "pending -- deploy on the server"
+
+    
