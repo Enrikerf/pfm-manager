@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@master
         with:
           fetch-depth: 0
-      - name: Create Release
+      - name: Create Release c
         id: create_release
         uses: actions/create-release@master
         env:
