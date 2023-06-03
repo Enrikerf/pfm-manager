@@ -26,6 +26,9 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 0
       - uses: actions/download-artifact@v3
         with:
           name: test-reports
