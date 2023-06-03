@@ -50,4 +50,10 @@
 ?   	github.com/Enrikerf/pfm/commandManager/app/Domain/Task/Service/Updater	[no test files]
 ?   	github.com/Enrikerf/pfm/commandManager/app/Domain/Task/Status	[no test files]
 ?   	github.com/Enrikerf/pfm/commandManager/app/Domain/Task/Step	[no test files]
-ok  	github.com/Enrikerf/pfm/commandManager/tests/Unit/Domain/TaskTest/StatusTest	0.008s	coverage: [no statements]
+--- FAIL: TestNewUnknownError (0.00s)
+    --- FAIL: TestNewUnknownError/Check_NewUnknownError_message (0.00s)
+        UnknownError_test.go:22: NewUnknownError() = this status is not valid, want this status is not valid
+FAIL
+coverage: [no statements]
+FAIL	github.com/Enrikerf/pfm/commandManager/tests/Unit/Domain/TaskTest/StatusTest	0.005s
+FAIL
