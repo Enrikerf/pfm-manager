@@ -14,8 +14,10 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           version-file: './version.yml'
+          skip-on-empty: 'true'
       - name: create release
         uses: actions/create-release@master
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
