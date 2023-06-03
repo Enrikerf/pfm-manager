@@ -7,5 +7,5 @@ type UnknownError interface {
 }
 
 func NewUnknownError() UnknownError {
-	return errors.New("status not valid")
+	return errors.New("Status not valid")
 }

@@ -26,9 +26,9 @@ jobs:
     - name: Results
       run: go test -json -coverprofile=cover.out ./... > result.json
     - name: cat
-      run: cat cover.out
+      run: echo $(cat cover.out)
     - name: cat2
-      run: cat cover.json
+      run: echo $(cat result.json)
 
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
