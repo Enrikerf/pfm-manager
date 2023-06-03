@@ -7,5 +7,5 @@ type ManualBidirectionalTaskOnlyCanHave2StepsError interface {
 }
 
 func NewManualBidirectionalTaskOnlyCanHave2StepsError() ManualBidirectionalTaskOnlyCanHave2StepsError {
-	return errors.New("ManualTaskOnlyCanHave2Steps")
+	return errors.New("NewManualBidirectionalTaskOnlyCanHave2StepsError")
 }

@@ -1,24 +1,40 @@
 package CommunicationMode
 
-type Mode string
+type Mode interface {
+	Value() Enum
+}
 
-const (
-	Unary         Mode = "UNARY"
-	ServerStream  Mode = "SERVER_STREAM"
-	ClientStream  Mode = "CLIENT_STREAM"
-	Bidirectional Mode = "BIDIRECTIONAL"
-)
+func New(enum Enum) Mode {
+	return &mode{enum}
+}
 
 func FromString(mode string) (Mode, error) {
 	switch mode {
 	case "UNARY":
-		return Unary, nil
+		return New(Unary), nil
 	case "SERVER_STREAM":
-		return ServerStream, nil
+		return New(ServerStream), nil
 	case "CLIENT_STREAM":
-		return ClientStream, nil
+		return New(ClientStream), nil
 	case "BIDIRECTIONAL":
-		return Bidirectional, nil
+		return New(Bidirectional), nil
 	}
-	return "", NewUnknownError()
+	return nil, NewUnknownError()
 }
+
+type mode struct {
+	enum Enum
+}
+
+func (s *mode) Value() Enum {
+	return s.enum
+}
+
+type Enum string
+
+const (
+	Unary         Enum = "UNARY"
+	ServerStream  Enum = "SERVER_STREAM"
+	ClientStream  Enum = "CLIENT_STREAM"
+	Bidirectional Enum = "BIDIRECTIONAL"
+)

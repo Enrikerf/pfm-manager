@@ -7,5 +7,5 @@ type CommunicationModeCanOnlyHaveOneStepError interface {
 }
 
 func NewCommunicationModeCanOnlyHaveOneStepError() CommunicationModeCanOnlyHaveOneStepError {
-	return errors.New("CommunicationModeCanOnlyHaveOneStepError")
+	return errors.New("NewCommunicationModeCanOnlyHaveOneStepError")
 }

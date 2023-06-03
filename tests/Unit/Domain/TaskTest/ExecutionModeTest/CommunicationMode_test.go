@@ -1,7 +1,7 @@
-package StatusTest
+package CommunicationModeTest
 
 import (
-	"github.com/Enrikerf/pfm/commandManager/app/Domain/Task/Status"
+	"github.com/Enrikerf/pfm/commandManager/app/Domain/Task/ExecutionMode"
 	"reflect"
 	"testing"
 )
@@ -13,11 +13,11 @@ func TestFromString(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		want    Status.Status
+		want    ExecutionMode.Mode
 		wantErr bool
 	}{
 		{
-			name: "Invalid Status throw unknown error",
+			name: "invalid Communication mode throw unknown error",
 			args: args{
 				mode: "INVALID",
 			},
@@ -25,33 +25,25 @@ func TestFromString(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name: "Valid Pending string",
+			name: "Valid Manual string",
 			args: args{
-				mode: "PENDING",
+				mode: "MANUAL",
 			},
-			want:    Status.New(Status.Pending),
+			want:    ExecutionMode.New(ExecutionMode.Manual),
 			wantErr: false,
 		},
 		{
-			name: "Valid Running string",
+			name: "Valid ServerStream string",
 			args: args{
-				mode: "RUNNING",
+				mode: "AUTOMATIC",
 			},
-			want:    Status.New(Status.Running),
-			wantErr: false,
-		},
-		{
-			name: "Valid Done string",
-			args: args{
-				mode: "DONE",
-			},
-			want:    Status.New(Status.Done),
+			want:    ExecutionMode.New(ExecutionMode.Automatic),
 			wantErr: false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := Status.FromString(tt.args.mode)
+			got, err := ExecutionMode.FromString(tt.args.mode)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("FromString() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -65,24 +57,24 @@ func TestFromString(t *testing.T) {
 
 func TestNew(t *testing.T) {
 	type args struct {
-		enum Status.Enum
+		enum ExecutionMode.Enum
 	}
 	tests := []struct {
 		name string
 		args args
-		want Status.Enum
+		want ExecutionMode.Enum
 	}{
 		{
 			name: "Test New",
 			args: args{
-				enum: Status.Pending,
+				enum: ExecutionMode.Automatic,
 			},
-			want: Status.Pending,
+			want: ExecutionMode.Automatic,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Status.New(tt.args.enum); !reflect.DeepEqual(got.Value(), tt.want) {
+			if got := ExecutionMode.New(tt.args.enum); !reflect.DeepEqual(got.Value(), tt.want) {
 				t.Errorf("New() = %v, want %v", got, tt.want)
 			}
 		})
