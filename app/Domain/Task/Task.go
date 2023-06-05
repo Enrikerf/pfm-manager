@@ -68,7 +68,7 @@ func validateInputs(
 		len(stepVos) > 1 {
 		return Error.NewCommunicationModeCanOnlyHaveOneStepError()
 	}
-	if executionMode.Value() == ExecutionMode.Manual && communicationMode.Value() == CommunicationMode.Bidirectional &&
+	if communicationMode.Value() == CommunicationMode.Bidirectional &&
 		len(stepVos) > 2 {
 		return Error.NewManualBidirectionalTaskOnlyCanHave2StepsError()
 	}
