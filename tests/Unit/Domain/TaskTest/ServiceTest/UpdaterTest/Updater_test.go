@@ -1,6 +1,7 @@
 package UpdaterTest
 
 import (
+	"github.com/Enrikerf/pfm/commandManager/app/Domain/Core/Error"
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Event"
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Task"
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Task/Host"
@@ -8,6 +9,11 @@ import (
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Task/Repository"
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Task/Service/Updater"
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Task/Status"
+	EventTest "github.com/Enrikerf/pfm/commandManager/tests/Unit/Domain/EventTest"
+	"github.com/Enrikerf/pfm/commandManager/tests/Unit/Domain/TaskTest"
+	"github.com/Enrikerf/pfm/commandManager/tests/Unit/Domain/TaskTest/HostTest"
+	"github.com/Enrikerf/pfm/commandManager/tests/Unit/Domain/TaskTest/PortTest"
+	"github.com/Enrikerf/pfm/commandManager/tests/Unit/Domain/TaskTest/RepositoryTest"
 	"testing"
 )
 
@@ -29,7 +35,36 @@ func TestUpdater_Update(t *testing.T) {
 		args    args
 		wantErr bool
 	}{
-		// TODO: Add test cases.
+		{
+			name: "1",
+			fields: fields{
+				FindRepository: RepositoryTest.BuildFindMock(TaskTest.BuildDefaultTaskMock(), nil),
+				SaveRepository: RepositoryTest.BuildSaveMock(),
+				Dispatcher:     EventTest.BuildDispatcherMock(),
+			},
+			args: args{
+				id:     TaskTest.DefaultId(),
+				host:   HostTest.BuildDefaultMock(),
+				port:   PortTest.BuildDefaultMock(),
+				status: Status.New(Status.Pending),
+			},
+			wantErr: false,
+		},
+		{
+			name: "2",
+			fields: fields{
+				FindRepository: RepositoryTest.BuildFindMock(nil, Error.NewRepositoryError("NewRepositoryError")),
+				SaveRepository: RepositoryTest.BuildSaveMock(),
+				Dispatcher:     EventTest.BuildDispatcherMock(),
+			},
+			args: args{
+				id:     TaskTest.DefaultId(),
+				host:   HostTest.BuildDefaultMock(),
+				port:   PortTest.BuildDefaultMock(),
+				status: Status.New(Status.Pending),
+			},
+			wantErr: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
