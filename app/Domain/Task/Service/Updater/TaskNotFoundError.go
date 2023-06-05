@@ -7,5 +7,5 @@ type TaskNotFoundError interface {
 }
 
 func NewTaskNotFoundError() TaskNotFoundError {
-	return errors.New("task not found")
+	return errors.New("NewTaskNotFoundError")
 }

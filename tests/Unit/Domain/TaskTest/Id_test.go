@@ -17,6 +17,53 @@ func TestLoadId(t *testing.T) {
 	})
 }
 
+func TestLoadIdFromString(t *testing.T) {
+	type args struct {
+		uuidString string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    string
+		wantErr bool
+	}{
+		{
+			name: "valid",
+			args: args{
+				uuidString: defaultUuid,
+			},
+			want:    defaultUuid,
+			wantErr: false,
+		},
+		{
+			name: "invalid",
+			args: args{
+				uuidString: invalidUuid,
+			},
+			want:    "not parseable ID",
+			wantErr: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := Task.LoadIdFromString(tt.args.uuidString)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("LoadIdFromString() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if err != nil {
+				if !reflect.DeepEqual(err.Error(), tt.want) {
+					t.Errorf("NewVo() error = %v, wantErr %v", err.Error(), tt.want)
+				}
+				return
+			}
+			if !reflect.DeepEqual(got.GetUuidString(), tt.want) {
+				t.Errorf("LoadIdFromString() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 func TestNewId(t *testing.T) {
 	tests := []struct {
 		name string

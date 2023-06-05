@@ -1,4 +1,4 @@
-package CommunicationModeTest
+package ExecutionModeTest
 
 import (
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Task/ExecutionMode"

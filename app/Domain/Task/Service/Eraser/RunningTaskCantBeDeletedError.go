@@ -7,5 +7,5 @@ type RunningTaskCantBeDeleted interface {
 }
 
 func NewRunningTaskCantBeDeletedError() RunningTaskCantBeDeleted {
-	return errors.New("status not valid")
+	return errors.New("NewRunningTaskCantBeDeletedError")
 }
