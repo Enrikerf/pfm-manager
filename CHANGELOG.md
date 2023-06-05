@@ -1,3 +1,14 @@
+## [1.0.6](https://github.com/Enrikerf/pfm-manager/compare/v1.0.5...v1.0.6) (2023-06-05)
+
+
+### Bug Fixes
+
+* ci/cd exclude tests from analisys ([d2ba876](https://github.com/Enrikerf/pfm-manager/commit/d2ba876ae71c197664dbfac06cfd81ef97662a22))
+* minor fixes discovered testing Step,port and host ([5349e76](https://github.com/Enrikerf/pfm-manager/commit/5349e76d2773ab7a1b6455bf333a11a70e4853c7))
+* testing task discover error on instantiation ([816ec32](https://github.com/Enrikerf/pfm-manager/commit/816ec3230f9c494ab2e25b07eb35eb01080373e8))
+
+
+
 ## [1.0.5](https://github.com/Enrikerf/pfm-manager/compare/v1.0.4...v1.0.5) (2023-06-03)
 
 
