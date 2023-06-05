@@ -1,4 +1,4 @@
-package Host
+package HostTest
 
 import (
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Task/Host"

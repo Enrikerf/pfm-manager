@@ -15,7 +15,7 @@ func (v *vo) GetSentence() string {
 func NewVo(sentence string) (Vo, error) {
 	self := &vo{}
 	if len(sentence) > 255 {
-		return self, NewInvalidSentenceLengthError()
+		return nil, NewInvalidSentenceLengthError()
 	}
 	self.sentence = sentence
 	return self, nil
