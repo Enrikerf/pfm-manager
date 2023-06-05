@@ -7,5 +7,5 @@ type InvalidPortError interface {
 }
 
 func NewInvalidPortError() InvalidPortError {
-	return errors.New("invalid host format")
+	return errors.New("invalid port format")
 }
