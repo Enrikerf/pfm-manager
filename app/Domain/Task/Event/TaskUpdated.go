@@ -13,7 +13,7 @@ type taskUpdated struct {
 }
 
 func NewTaskUpdated(entityId string) TaskUpdated {
-	self := &taskCreated{TaskUpdatedEventName, entityId}
+	self := &taskUpdated{TaskUpdatedEventName, entityId}
 	return self
 }
 

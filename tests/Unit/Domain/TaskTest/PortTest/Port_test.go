@@ -1,4 +1,4 @@
-package HostTest
+package PortTest
 
 import (
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Task/Port"
@@ -25,7 +25,7 @@ func TestNewVo(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name: "Test valid host",
+			name: "Test valid port",
 			args: args{
 				value: "8080",
 			},

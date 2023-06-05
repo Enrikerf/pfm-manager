@@ -1,4 +1,4 @@
-package HostTest
+package PortTest
 
 import (
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Task/Port"
@@ -12,7 +12,7 @@ func TestNewInvalidHostError(t *testing.T) {
 		want string
 	}{
 		{
-			name: "Check NewInvalidHostError message",
+			name: "Check NewInvalidPortError message",
 			want: "invalid port format",
 		},
 	}

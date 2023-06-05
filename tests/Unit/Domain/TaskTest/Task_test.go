@@ -9,11 +9,19 @@ import (
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Task/Port"
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Task/Status"
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Task/Step"
+	"github.com/google/uuid"
 	"reflect"
 	"testing"
 )
 
-/*func TestLoad(t *testing.T) {
+func TestLoad(t *testing.T) {
+	defaultHost := "0.0.0.0"
+	defaultPort := "8080"
+	defaultSentence := "Sentence"
+	host, _ := Host.NewVo(defaultHost)
+	port, _ := Port.NewVo(defaultPort)
+	step, _ := Step.NewVo(defaultSentence)
+	id := Task.NewId()
 	type args struct {
 		id                Task.Id
 		host              Host.Vo
@@ -26,22 +34,36 @@ import (
 	tests := []struct {
 		name    string
 		args    args
-		want    Task.Task
+		want    Status.Status
 		wantErr bool
 	}{
 		{
-			name: "",
+			name: "load OK",
 			args: args{
-				id:                nil,
-				host:              nil,
-				port:              nil,
-				stepVos:           nil,
-				communicationMode: nil,
-				executionMode:     nil,
-				status:            nil,
+				id:                id,
+				host:              host,
+				port:              port,
+				stepVos:           []Step.Vo{step},
+				communicationMode: CommunicationMode.New(CommunicationMode.ServerStream),
+				executionMode:     ExecutionMode.New(ExecutionMode.Automatic),
+				status:            Status.New(Status.Done),
 			},
-			want:    nil,
+			want:    Status.New(Status.Done),
 			wantErr: false,
+		},
+		{
+			name: "load KO",
+			args: args{
+				id:                id,
+				host:              host,
+				port:              port,
+				stepVos:           []Step.Vo{},
+				communicationMode: CommunicationMode.New(CommunicationMode.ServerStream),
+				executionMode:     ExecutionMode.New(ExecutionMode.Automatic),
+				status:            Status.New(Status.Done),
+			},
+			want:    Status.New(Status.Done),
+			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
@@ -51,12 +73,15 @@ import (
 				t.Errorf("Load() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
+			if err != nil {
+				return
+			}
+			if !reflect.DeepEqual(got.GetStatus(), tt.want) {
 				t.Errorf("Load() got = %v, want %v", got, tt.want)
 			}
 		})
 	}
-}*/
+}
 
 func TestNew(t *testing.T) {
 	defaultHost := "0.0.0.0"
@@ -248,6 +273,12 @@ func TestNew(t *testing.T) {
 				}
 				return
 			}
+			if reflect.TypeOf(got.GetId().GetUuid()) != reflect.TypeOf(uuid.New()) {
+				t.Errorf("NewVo() error = %v, wantErr %v", reflect.TypeOf(got.GetId()), reflect.TypeOf(uuid.New()))
+			}
+			if !reflect.DeepEqual(got.GetHost().GetValue(), defaultHost) {
+				t.Errorf("New() got = %v, want %v", got, tt.want)
+			}
 			if !reflect.DeepEqual(got.GetHost().GetValue(), defaultHost) {
 				t.Errorf("New() got = %v, want %v", got, tt.want)
 			}
@@ -268,4 +299,36 @@ func TestNew(t *testing.T) {
 			}
 		})
 	}
+}
+
+func Test_task_Setters(t *testing.T) {
+	defaultHost := "0.0.0.0"
+	defaultPort := "8080"
+	defaultSentence := "Sentence"
+	newHost := "0.0.0.1"
+	newPort := "8081"
+	host, _ := Host.NewVo(defaultHost)
+	port, _ := Port.NewVo(defaultPort)
+	step, _ := Step.NewVo(defaultSentence)
+
+	t.Run("Test Task Setters", func(t *testing.T) {
+		got, _ := Task.New(host, port, []Step.Vo{step}, CommunicationMode.New(CommunicationMode.Unary), ExecutionMode.New(ExecutionMode.Manual))
+		newHost, _ := Host.NewVo(newHost)
+		newPort, _ := Port.NewVo(newPort)
+		newStatus := Status.New(Status.Done)
+		got.SetHost(newHost)
+		got.SetPort(newPort)
+		got.SetStatus(newStatus)
+
+		if !reflect.DeepEqual(got.GetHost(), newHost) {
+			t.Errorf("New() got = %v, want %v", got.GetHost(), newHost)
+		}
+		if !reflect.DeepEqual(got.GetPort(), newPort) {
+			t.Errorf("New() got = %v, want %v", got.GetPort(), newPort)
+		}
+		if !reflect.DeepEqual(got.GetStatus(), newStatus) {
+			t.Errorf("New() got = %v, want %v", got, newStatus)
+		}
+	})
+
 }
