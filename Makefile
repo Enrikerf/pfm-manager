@@ -1,6 +1,7 @@
 .DEFAULT_GOAL := help
 target=dev
 tag=latest
+service=manager
 
 ## —— 📦 Makefile 📦 —————————————————————————————————————————
 
@@ -12,7 +13,7 @@ help: ## Outputs this help screen
 build: ## Up the docker environment
 	target=${target} docker-compose build --progress=plain
 up: ## Up the docker environment
-	docker network ls | grep pfm-network > /dev/null || docker network create pfm-network
+	#docker network ls | grep pfm-network > /dev/null || docker network create pfm-network
 	target=${target} docker-compose up -d
 down: ## Down the docker environment
 	target=${target} docker-compose down
@@ -22,8 +23,10 @@ run-prod:
 	docker run --rm --name app-prod go-dev:19.2-prod
 
 ## —— Go Container —————————————————————————————————————————
-enter: ## Access to container
-	docker exec -u docker-user -ti go-manager /usr/bin/fish
+enter: ## Access to manager container
+	docker exec -u docker-user -ti pfm-manager /usr/bin/fish
+enter-envoy: ## Access to envoy container
+	docker exec -ti pfm-envoy /bin/bash
 run: ## run main.go
 	docker exec -ti go-dev go run main.go
 debug: ## run on debug mode, remember to listen on the IDE
