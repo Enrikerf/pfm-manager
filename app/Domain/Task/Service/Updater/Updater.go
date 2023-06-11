@@ -1,7 +1,6 @@
 package Updater
 
 import (
-	"fmt"
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Event"
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Task"
 	TaskEvent "github.com/Enrikerf/pfm/commandManager/app/Domain/Task/Event"
@@ -35,7 +34,6 @@ func (updater *Updater) Update(
 		task.SetPort(port)
 	}
 	if status != nil {
-		fmt.Println("update status")
 		task.SetStatus(status)
 	}
 	updater.SaveRepository.Persist(task)

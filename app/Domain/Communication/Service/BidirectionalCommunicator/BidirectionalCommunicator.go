@@ -80,12 +80,8 @@ func (b *bidirectionalCommunicator) write(step Step.Step, batch Result.Batch) bo
 func (b *bidirectionalCommunicator) read() (Content.Content, error) {
 	resultsContent, err := b.callBidiPort.Read()
 	if err != nil {
-		fmt.Println(err.Error())
 		return nil, err
 	}
-	//if len(resultsContent.GetValue()) > 0 {
-	//	return nil, nil
-	//}
 	return resultsContent, nil
 }
 

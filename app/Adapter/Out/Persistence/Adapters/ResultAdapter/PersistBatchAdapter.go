@@ -38,6 +38,5 @@ func (adapter PersistBatchAdapter) Persist(batch Result.Batch) {
 		}
 	} else {
 		adapter.Orm.Model(&currentBatchDb).Updates(newBatchDb)
-		//TODO: Update of results not implemented
 	}
 }

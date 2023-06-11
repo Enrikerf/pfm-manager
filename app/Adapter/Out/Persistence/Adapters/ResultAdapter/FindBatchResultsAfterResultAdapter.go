@@ -17,7 +17,6 @@ func (adapter FindBatchResultsAfterResultAdapter) Find(id Result.BatchId, result
 	var resultsDb []Model.ResultDb
 	var results []Result.Result
 	var err error
-	//TODO: cleanup
 	if resultId != nil {
 		err = adapter.Orm.First(&resultDb, "uuid = ?", resultId.GetUuidString()).Error
 		if err != nil {
