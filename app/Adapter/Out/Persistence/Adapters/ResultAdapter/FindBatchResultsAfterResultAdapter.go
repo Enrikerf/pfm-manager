@@ -16,19 +16,33 @@ func (adapter FindBatchResultsAfterResultAdapter) Find(id Result.BatchId, result
 	var resultDb = Model.ResultDb{}
 	var resultsDb []Model.ResultDb
 	var results []Result.Result
-	err := adapter.Orm.First(&resultDb, "uuid = ?", resultId.GetUuidString()).Error
-	if err != nil {
-		return nil, Error.NewRepositoryError(err.Error())
+	var err error
+	if resultId != nil {
+		err = adapter.Orm.First(&resultDb, "uuid = ?", resultId.GetUuidString()).Error
+		if err != nil {
+			return nil, Error.NewRepositoryError(err.Error())
+		}
 	}
 	err = adapter.Orm.First(&batchDb, "uuid = ?", id.GetUuidString()).Error
 	if err != nil {
 		return nil, Error.NewRepositoryError(err.Error())
 	}
-	err = adapter.Orm.
-		Table("results").
-		Where("batch_id = ? AND result_id > ?", batchDb.ID, resultDb.ID).
-		Find(&resultsDb).
-		Error
+	if resultId != nil {
+		err = adapter.Orm.
+			Table("results").
+			Where("batch_id = ? AND id > ?", batchDb.ID, resultDb.ID).
+			Limit(50).
+			Find(&resultsDb).
+			Error
+	} else {
+		err = adapter.Orm.
+			Table("results").
+			Where("batch_id = ?", batchDb.ID).
+			Limit(50).
+			Find(&resultsDb).
+			Error
+	}
+
 	if err != nil {
 		return nil, Error.NewRepositoryError(err.Error())
 	}

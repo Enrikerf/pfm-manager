@@ -29,7 +29,7 @@ func (controller ResultController) CommunicateTaskManually(
 	command.TaskUuid = request.GetTaskUuid()
 	batch, err := controller.CreateBatchAndFillUseCase.Communicate(command)
 	if err != nil {
-		return nil, fmt.Errorf("error")
+		return nil, fmt.Errorf(err.Error())
 	}
 	return &resultProto.CommunicateTaskManuallyResponse{
 		BatchUuid: batch.GetId().GetUuidString(),
@@ -96,12 +96,12 @@ func (controller ResultController) StreamResults(
 			LastId:    lastId,
 		})
 		if err != nil {
+			if err.Error() == "EndOfStreamError" {
+				fmt.Printf("Task Done")
+				return nil
+			}
 			fmt.Printf(err.Error())
 			return err
-		}
-		if results == nil {
-			fmt.Printf("Task Done")
-			return nil
 		}
 		if len(results) > 0 {
 			var resultProtoArray []*resultProto.Result

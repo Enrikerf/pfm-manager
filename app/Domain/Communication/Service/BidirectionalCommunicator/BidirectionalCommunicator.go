@@ -1,6 +1,7 @@
 package BidirectionalCommunicator
 
 import (
+	"fmt"
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Communication/Repository"
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Result"
 	"github.com/Enrikerf/pfm/commandManager/app/Domain/Result/Content"
@@ -79,11 +80,12 @@ func (b *bidirectionalCommunicator) write(step Step.Step, batch Result.Batch) bo
 func (b *bidirectionalCommunicator) read() (Content.Content, error) {
 	resultsContent, err := b.callBidiPort.Read()
 	if err != nil {
+		fmt.Println(err.Error())
 		return nil, err
 	}
-	if len(resultsContent.GetValue()) > 0 {
-		return nil, nil
-	}
+	//if len(resultsContent.GetValue()) > 0 {
+	//	return nil, nil
+	//}
 	return resultsContent, nil
 }
 
@@ -97,6 +99,7 @@ func (b *bidirectionalCommunicator) close(batch Result.Batch) {
 func (b *bidirectionalCommunicator) processError(err error, batch Result.Batch) {
 	content, err := Content.NewContent(err.Error())
 	if err != nil {
+		fmt.Println(err.Error())
 		content, err = Content.NewContent(err.Error())
 	}
 	result := Result.New(batch.GetId(), content)
