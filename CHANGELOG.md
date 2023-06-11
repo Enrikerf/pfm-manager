@@ -1,3 +1,13 @@
+## [1.0.8](https://github.com/Enrikerf/pfm-manager/compare/v1.0.7...v1.0.8) (2023-06-11)
+
+
+### Bug Fixes
+
+* envoy configuration with dockerized environment ([b952fda](https://github.com/Enrikerf/pfm-manager/commit/b952fda48eaa4336ebc2016aa34e711c62286402))
+* hotfix to test with frontend ([67c62e0](https://github.com/Enrikerf/pfm-manager/commit/67c62e0aea7a563169f9352523a2bb313a026e5a))
+
+
+
 ## [1.0.7](https://github.com/Enrikerf/pfm-manager/compare/v1.0.6...v1.0.7) (2023-06-05)
 
 
@@ -23,15 +33,6 @@
 ### Bug Fixes
 
 * cicd ([e8548d1](https://github.com/Enrikerf/pfm-manager/commit/e8548d1738c1226f61830550cfbb0dc2b263d61f))
-
-
-
-## [1.0.3](https://github.com/Enrikerf/pfm-manager/compare/v1.0.2...v1.0.3) (2023-06-03)
-
-
-### Bug Fixes
-
-* cicd ([1a8a661](https://github.com/Enrikerf/pfm-manager/commit/1a8a661d01f19daeba64f7087a41167906cebecb))
 
 
 
