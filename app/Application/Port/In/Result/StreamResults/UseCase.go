@@ -31,20 +31,22 @@ type useCase struct {
 }
 
 func (service *useCase) Stream(query Query) (results []Result.Result, err error) {
-	batch, err := service.FindBatchPort.Find(query.BatchUuid)
-	if err != nil {
-		return nil, err
-	}
-	task, err := service.TaskFinder.Find(batch.GetTaskId())
-	if err != nil {
-		return nil, err
-	}
-	if task.GetStatus().Value() != Status.Running {
-		return nil, nil
-	}
 	results, err = service.FindBatchResultsAfterResult.Find(query.BatchUuid, query.LastId)
 	if err != nil {
 		return nil, err
+	}
+	if results == nil {
+		batch, err := service.FindBatchPort.Find(query.BatchUuid)
+		if err != nil {
+			return nil, err
+		}
+		task, err := service.TaskFinder.Find(batch.GetTaskId())
+		if err != nil {
+			return nil, err
+		}
+		if task.GetStatus().Value() != Status.Running {
+			return nil, NewEndOfStreamError()
+		}
 	}
 	return results, nil
 }

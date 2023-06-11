@@ -41,7 +41,7 @@ func (controller TaskController) CreateTask(
 
 	task, err := controller.SaveTaskUseCase.Create(command)
 	if err != nil {
-		return nil, fmt.Errorf("error")
+		return nil, fmt.Errorf(err.Error())
 	}
 	var commandNames []string
 	for _, command := range task.GetSteps() {
@@ -97,7 +97,7 @@ func (controller TaskController) UpdateTask(ctx context.Context, request *taskPr
 	if params.GetPort() == nil {
 		port, _ = Port.NewVo(params.GetPort().GetValue())
 	}
-	if params.GetStatus() == 0 {
+	if params.GetStatus() != 0 {
 		s, _ = Status.FromString(params.GetStatus().String())
 	}
 	err := controller.UpdateTaskUseCase.Update(UpdateTask.Command{

@@ -27,5 +27,7 @@ func (e *eventDispatcherAdapter) Dispatch(event Event.Event) {
 	switch event.GetName() {
 	case TaskEvent.TaskCreatedEventName:
 		go e.taskEventHandler.Handle(event)
+	case TaskEvent.TaskUpdatedEventName:
+		go e.taskEventHandler.Handle(event)
 	}
 }

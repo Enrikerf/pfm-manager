@@ -14,6 +14,13 @@
 
 FROM envoyproxy/envoy:v1.20.0
 
-COPY envoy/envoy.yaml /etc/envoy/envoy.yaml
+COPY docker/envoy/envoy.yaml /etc/envoy/envoy.yaml
+
+WORKDIR /
+
+RUN apt update -y && apt install -y build-essential curl wget && \
+    wget https://github.com/ktr0731/evans/releases/download/v0.10.11/evans_linux_arm64.tar.gz && \
+    tar -xzvf evans_linux_arm64.tar.gz && \
+    rm evans_linux_arm64.tar.gz
 
 CMD /usr/local/bin/envoy -c /etc/envoy/envoy.yaml -l trace --log-path /tmp/envoy_info.log
