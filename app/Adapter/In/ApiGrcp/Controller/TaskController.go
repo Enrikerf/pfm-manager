@@ -39,6 +39,10 @@ func (controller TaskController) CreateTask(
 	command.CommunicationMode = protoTask.GetMode().String()
 	command.ExecutionMode = protoTask.GetExecutionMode().String()
 
+	if command.CommandSentences != nil {
+		fmt.Println("test")
+	}
+
 	task, err := controller.SaveTaskUseCase.Create(command)
 	if err != nil {
 		return nil, fmt.Errorf(err.Error())
